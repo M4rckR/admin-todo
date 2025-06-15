@@ -1,0 +1,24 @@
+# Versión de Docker Compose utilizada
+version: '3'
+
+services:
+  # Servicio de base de datos PostgreSQL para la aplicación de todos
+  todosDB:
+    # Imagen oficial de PostgreSQL versión 15.3
+    image: postgres:15.3
+    # Nombre personalizado del contenedor
+    container_name: todos-db
+    # Reinicia automáticamente el contenedor si se detiene
+    restart: always
+    # Mapeo de puertos: puerto_host:puerto_contenedor
+    ports:
+      - 5432:5432  # Puerto estándar de PostgreSQL
+    # Variables de entorno para configurar PostgreSQL
+    environment:
+      - POSTGRES_USER=postgres      # Usuario de la base de datos
+      - POSTGRES_PASSWORD=postgres  # Contraseña del usuario
+    # Volúmenes para persistir los datos
+    volumes:
+      # Monta la carpeta local ./postgres en el directorio de datos de PostgreSQL
+      - ./postgres:/var/lib/postgresql/data
+
