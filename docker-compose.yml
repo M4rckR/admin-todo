@@ -17,6 +17,7 @@ services:
     environment:
       - POSTGRES_USER=postgres      # Usuario de la base de datos
       - POSTGRES_PASSWORD=postgres  # Contraseña del usuario
+      - POSTGRES_DB=todos_db  # Nombre de la base de datos
     # Volúmenes para persistir los datos
     volumes:
       # Monta la carpeta local ./postgres en el directorio de datos de PostgreSQL
