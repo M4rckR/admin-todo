@@ -1,6 +1,7 @@
 // import { useEffect } from "react";
 
 import { prisma } from "@/lib/prisma";
+import { TodosGrid } from "@/todos/components/TodosGrid";
 
 export default async function RestTodos() {
   const todos = await prisma.todo.findMany({orderBy: {description: "asc"}});
@@ -16,9 +17,10 @@ export default async function RestTodos() {
       //   <WidgetItem />
       // </div>
       <>
-        <h1>Rest Todos</h1>
+      {/* Formulario para agregar nuevos todos */}
         {
-          JSON.stringify(todos)
+          // JSON.stringify(todos)
+          <TodosGrid todos={todos} />
         }
       </>
   );
