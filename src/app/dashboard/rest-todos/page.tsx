@@ -1,6 +1,7 @@
 // import { useEffect } from "react";
 
 import { prisma } from "@/lib/prisma";
+import { NewTodo } from "@/todos/components/NewTodo";
 import { TodosGrid } from "@/todos/components/TodosGrid";
 
 export default async function RestTodos() {
@@ -18,6 +19,10 @@ export default async function RestTodos() {
       // </div>
       <>
       {/* Formulario para agregar nuevos todos */}
+      <div className="w-full px-3 mx-5  mb-5">
+        <NewTodo />
+      </div>
+
         {
           // JSON.stringify(todos)
           <TodosGrid todos={todos} />
