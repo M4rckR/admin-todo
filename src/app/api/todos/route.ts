@@ -36,7 +36,6 @@ const postSchema = yup.object({
 })
 
 export async function POST(request: Request) { 
-
     try{
         const { completed, description } = await postSchema.validate(await request.json())    
 

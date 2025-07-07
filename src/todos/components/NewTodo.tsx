@@ -1,25 +1,26 @@
 'use client';
 
-import { createTodo, deleteCompleted } from "@/todos/helpers/todos";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
+import { addTodo, deleteCompleted } from "../actions/todo-actions";
 
 
 export const NewTodo = () => { 
 
-    const router = useRouter();
+    // const router = useRouter();
     const [description, setDescription] = useState('');
     const onSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await createTodo(description);
+        if(description.trim() === '') return;
+        await addTodo(description);
         setDescription('');
-        router.refresh();
+        // router.refresh();
     }
 
     const deleteCompletedTodos = async () => {
         await deleteCompleted();
-        router.refresh();
+        // router.refresh();
     }
 
   return (
@@ -38,7 +39,7 @@ export const NewTodo = () => {
       <span className='flex flex-1'></span>
 
       <button 
-        onClick={ deleteCompletedTodos }
+        onClick={ () => deleteCompletedTodos() }
         type='button' className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all">
         <IoTrashOutline />
         Delete
