@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IoCalendar, IoCheckboxOutline, IoListOutline, IoLogoReact } from "react-icons/io5";
+import { IoCalendar, IoCheckboxOutline, IoListOutline, IoLogoReact, IoBookOutline } from "react-icons/io5";
 import { SidebarItem } from "./SidebarItem";
 import { CiLogout } from "react-icons/ci";
 
@@ -18,6 +18,11 @@ const menuItems = [
     icon: <IoListOutline />,
     title: "Server Actions",
     path: "/dashboard/server-todos",
+  },
+  {
+    icon: <IoBookOutline />,
+    title: "Cookies",
+    path: "/dashboard/cookies",
   }
 ]
 
