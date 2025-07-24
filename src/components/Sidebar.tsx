@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { IoCalendar, IoCheckboxOutline, IoListOutline, IoLogoReact, IoBookOutline } from "react-icons/io5";
+import { IoCalendar, IoCheckboxOutline, IoListOutline, IoLogoReact, IoBookOutline, IoPersonOutline } from "react-icons/io5";
 import { SidebarItem } from "./SidebarItem";
 import { CiLogout } from "react-icons/ci";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 const menuItems = [
   {
@@ -23,10 +25,21 @@ const menuItems = [
     icon: <IoBookOutline />,
     title: "Cookies",
     path: "/dashboard/cookies",
+  },
+  {
+    icon: <IoPersonOutline />,
+    title: "Profile",
+    path: "/dashboard/profile",
   }
 ]
 
-export const Sidebar = () => {
+export const Sidebar = async () => {
+  const session = await auth()
+
+  if (!session) {
+    return redirect('/');
+  }
+
   return (
     <>
       {/* TODO: src/components <Sidebar /> */}
@@ -43,16 +56,16 @@ export const Sidebar = () => {
           <div className="mt-8 text-center">
             {/* Next/Image */}
             <Image
-              src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c"
+              src={session.user?.image || ''}
               width={128}
               height={128}
               alt=""
               className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
             />
             <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-              Cynthia J. Watts
+              {session.user?.name}
             </h5>
-            <span className="hidden text-gray-400 lg:block">Admin</span>
+            {/* <span className="hidden text-gray-400 lg:block">Admin</span> */}
           </div>
 
           <ul className="space-y-2 tracking-wide mt-8">
