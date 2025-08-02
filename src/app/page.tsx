@@ -1,11 +1,15 @@
-"use client"
-import { signIn } from "next-auth/react"
+// "use client"
+// import { signIn } from "next-auth/react"
+import { redirect } from "next/navigation"
 
 export default function Home() {
+
+  redirect('/dashboard/')
+
   return (
     <>
-      <h1 className="text-5xl font-bold">Hello World</h1>
-      <div className="flex flex-col gap-4 mt-8 max-w-xs mx-auto">
+      {/* <h1 className="text-5xl font-bold">Hello World</h1> */}
+      {/* <div className="flex flex-col gap-4 mt-8 max-w-xs mx-auto">
         <button
           className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded shadow transition-colors duration-200"
           onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
@@ -29,7 +33,7 @@ export default function Home() {
           </svg>
           Iniciar sesión con Google
         </button>
-      </div>
+      </div> */}
     </>
   )
 }

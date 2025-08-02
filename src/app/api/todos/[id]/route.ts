@@ -1,13 +1,12 @@
-'use server'
 import { prisma } from '@/lib/prisma'
 import { Todo } from '@prisma/client'
 import { NextResponse } from 'next/server'
 import * as yup from 'yup'
 
 type Segments = {
-    params: {
+    params: Promise<{
         id: string
-    }
+    }>
 }
 
 const getTodo = async(id: string):Promise<Todo | null> => {
@@ -16,11 +15,12 @@ const getTodo = async(id: string):Promise<Todo | null> => {
 }
 
 export async function GET(request: Request, { params }: Segments) {
-    const todo = await getTodo(params.id)
+    const { id } = await params
+    const todo = await getTodo(id)
 
     if(!todo) {
         return NextResponse.json({
-            message: `Todo with id ${params.id} not found`
+            message: `Todo with id ${id} not found`
         }, { status: 404 })
     }
 
@@ -33,11 +33,12 @@ const putSchema = yup.object({
 })
 
 export async function PUT(request: Request, { params }: Segments) {
-    const todo = await getTodo(params.id)
+    const { id } = await params
+    const todo = await getTodo(id)
 
     if(!todo) {
         return NextResponse.json({
-            message: `Todo with id ${params.id} not found`
+            message: `Todo with id ${id} not found`
         }, { status: 404 })
     }
 
@@ -45,13 +46,13 @@ export async function PUT(request: Request, { params }: Segments) {
         const {completed, description, } = await putSchema.validate(await request.json())
 
         const updatedTodo = await prisma.todo.update({
-            where: { id: params.id },
+            where: { id },
             data: {completed, description}
         })
     
         return NextResponse.json(updatedTodo)
     } catch (error) {
-        NextResponse.json(error, {status: 400})
+        return NextResponse.json(error, {status: 400})
     }
 
 

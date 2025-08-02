@@ -1,13 +1,9 @@
 "use client"
 import React from "react";
 import { CiBellOn, CiChat1, CiMenuBurger, CiSearch } from "react-icons/ci";
-import { signOut } from "next-auth/react"
 
 
 export const TopMenu = () => {
-
-
-
   return (
     <>
       {/* TODO: src/components <TopMenu /> */}
@@ -27,10 +23,7 @@ export const TopMenu = () => {
                 </span>
               </div>
             </div>
-            <button className="text-gray-100 bg-gray-500 rounded-xl p-2 cursor-pointer hover:bg-gray-600" onClick={() => signOut()}>Cerrar sesión</button>
             
-            
-
             <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 md:hidden">
               <CiSearch />
             </button>
