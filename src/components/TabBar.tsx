@@ -1,4 +1,6 @@
 "use client"
+import { setCookie } from "cookies-next"
+import { useRouter } from "next/navigation"
 import { useState } from "react"  
 type TabBarProps = {
   currentTab?: number
@@ -6,14 +8,21 @@ type TabBarProps = {
 }
 export const TabBar = ({ currentTab= 1, tabOptions= [1, 2, 3, 4, 5] }: TabBarProps) => {
 
+  const router = useRouter()
   const [selectedTab, setSelectedTab] = useState(currentTab)
+
 
   const handleTabChange = (tab: number) => {
     setSelectedTab(tab)
+    setCookie('selectedTab', tab.toString())
+    router.refresh()
   }
 
   return (
-    <div className={`grid w-full ${'grid-cols-' + tabOptions?.length} space-x-2 rounded-xl bg-gray-200 p-2`}>
+    <div 
+      style={{ display: 'grid', gridTemplateColumns: `repeat(${tabOptions.length}, 1fr)` }}
+      className="w-full space-x-2 rounded-xl bg-gray-200 p-2"
+    >
       {tabOptions?.map((option) => (
         <div key={option}>
           <input

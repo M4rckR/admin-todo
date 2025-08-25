@@ -1,0 +1,16 @@
+import { ProductCard } from "@/products/components/ProductCart";
+import { products } from "@/products/data/products";
+
+export default function ProductsPage() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+        {/* Product Card */}
+
+        {
+            products.map((product) => (
+                <ProductCard key={product.id} {...product} />
+            ))
+        }
+    </div>
+  )
+}
